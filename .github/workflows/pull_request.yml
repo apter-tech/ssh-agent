@@ -27,6 +27,11 @@ jobs:
             ./check.sh
           post: |
             ./post_check.sh
+      - name: Install docker (Missing on MacOS)
+        if: runner.os == 'macos'
+        shell: bash
+        run: |
+          brew install docker
       - name: Deploy over SSH
         shell: bash
         env:
