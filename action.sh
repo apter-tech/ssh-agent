@@ -2,6 +2,8 @@
 
 set -e
 
+SSH_KNOWN_HOSTS_FILE="${HOME}/.ssh/known_hosts"
+
 mkdir -p "$(dirname "${SSH_KNOWN_HOSTS_FILE}")"
 
 if [ -z "${SSH_HOST}" ] && [ -z "${SSH_KNOWN_HOSTS}" ]; then
@@ -41,3 +43,5 @@ Failed to scan SSH host keys for ${SSH_HOST}"
 fi
 
 chmod 600 "${SSH_KNOWN_HOSTS_FILE}"
+
+unset SSH_KNOWN_HOSTS_FILE
