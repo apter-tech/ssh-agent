@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+mkdir -p "$(dirname "${SSH_KNOWN_HOSTS_FILE}")"
+
 if [ -z "${SSH_HOST}" ] && [ -z "${SSH_KNOWN_HOSTS}" ]; then
     echo ":error file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=Input validation::\
 One of the input, 'ssh-host' or 'ssh-known-hosts' must be set. Please update your workflow inputs."
