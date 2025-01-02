@@ -39,3 +39,5 @@ Failed to scan SSH host keys for ${SSH_HOST}"
         echo "::notice file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=Notice::${SSH_KNOWN_HOSTS_FILE} has been created."
     fi
 fi
+
+chmod 600 "${SSH_KNOWN_HOSTS_FILE}"
