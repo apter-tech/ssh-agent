@@ -18,8 +18,7 @@ jobs:
         uses: pyTooling/Actions/with-post-step@9ceefdbf5dceae8c441fc393ed82344c7ca8bbdb # v3.1.1
         with:
           main: |
-            # Do nothing
-            exit 0
+            sh noop.sh
           post: |
             sh post_check.sh
       - name: Setup SSH key
