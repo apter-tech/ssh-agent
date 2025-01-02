@@ -1,0 +1,58 @@
+name: 'apter-tech/ssh-agent'
+description: 'Run `ssh-agent`, load an SSH key to access other private repositories and setup `known_hosts` for host verification.',
+inputs:
+  ssh-host:
+    description: Hostname to fetch SSH keys from using ssh-keyscan.
+    required: false
+  ssh-key-type:
+    description: |
+      Specify the type of the key to fetch from the scanned hosts. The possible values are “ecdsa”, “ed25519”, “ecdsa-sk”, “ed25519-sk”, or “rsa”.
+      Multiple values may be specified by separating them with commas. The default is to fetch all the above key types.
+    required: false
+    default: 'rsa'
+  ssh-known-hosts:
+    description: 'Predefined known hosts to be added directly.'
+    required: false
+  # Inputs from webfactory/ssh-agent
+  ssh-private-key:
+    description: 'Private SSH key to register in the SSH agent'
+    required: true
+  ssh-auth-sock:
+    description: 'Where to place the SSH Agent auth socket'
+    required: false
+  log-public-key:
+    description: 'Whether or not to log public key fingerprints'
+    required: false
+    default: true
+  ssh-agent-cmd:
+    description: 'ssh-agent command'
+    required: false
+  ssh-add-cmd:
+    description: 'ssh-add command'
+    required: false
+  git-cmd:
+    description: 'git command'
+    required: false
+runs:
+  using: 'composite'
+  steps:
+    - uses: pyTooling/Actions/with-post-step@9ceefdbf5dceae8c441fc393ed82344c7ca8bbdb # v3.1.1
+      env:
+        SSH_HOST: ${{ inputs.ssh-host }}
+        SSH_KEY_TYPE: ${{ inputs.ssh-key-type }}
+        SSH_KNOWN_HOSTS: ${{ inputs.ssh-known-hosts }}
+        SSH_KNOWN_HOSTS_FILE: '~/.ssh/known_hosts'
+      with:
+        main: |
+          ./action.sh
+        post: |
+          ./post_action.sh
+    - uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387 # v0.9.0
+      with:
+        ssh-private-key: ${{ inputs.ssh-private-key }}
+        ssh-auth-sock: ${{ inputs.ssh-auth-sock }}
+        log-public-key: ${{ inputs.log-public-key }}
+        ssh-agent-cmd: ${{ inputs.ssh-agent-cmd }}
+        ssh-add-cmd: ${{ inputs.ssh-add-cmd }}
+        git-cmd: ${{ inputs.git-cmd }}
+
