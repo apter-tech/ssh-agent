@@ -51,7 +51,7 @@ runs:
         SSH_KNOWN_HOSTS_FILE: '~/.ssh/known_hosts'
       with:
         main: |
-          ./action.sh
+          sh action.sh
         post: |
-          ./post_action.sh
+          sh post_action.sh
 
