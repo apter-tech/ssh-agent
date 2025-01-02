@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 if [ -z "${SSH_KNOWN_HOSTS_FILE}" ]; then
     echo "::error file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=Notice::\
