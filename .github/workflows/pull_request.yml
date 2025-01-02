@@ -21,7 +21,7 @@ jobs:
             # Do nothing
             exit 0
           post: |
-            ./post_check.sh
+            sh post_check.sh
       - name: Setup SSH key
         uses: ./
         with:
@@ -31,7 +31,7 @@ jobs:
       - name: Check known hosts
         shell: bash
         run: |
-          ./check.sh
+          sh check.sh
       - name: Install docker (Missing on MacOS)
         if: runner.os == 'macos'
         shell: bash
@@ -42,8 +42,4 @@ jobs:
         env:
           DOCKER_HOST: ${{ secrets.DOCKER_HOST }}
         run: |
-          # renovate: datasource=docker depname=traefik/whoami versioning=docker
-          WHOAMI_VERSION="43a68d10b9dfcfc3ffbfe4dd42100dc9aeaf29b3a5636c856337a5940f1b4f1c" # v1.10
-          docker run --detach --publish-all --name whoami traefik/whoami:"${WHOAMI_VERSION}"
-          docker stop whoami
-          docker rm whoami
+          sh deploy.sh
