@@ -9,7 +9,6 @@ inputs:
       Specify the type of the key to fetch from the scanned hosts. The possible values are “ecdsa”, “ed25519”, “ecdsa-sk”, “ed25519-sk”, or “rsa”.
       Multiple values may be specified by separating them with commas. The default is to fetch all the above key types.
     required: false
-    default: 'rsa'
   ssh-known-hosts:
     description: 'Predefined known hosts to be added directly.'
     required: false
