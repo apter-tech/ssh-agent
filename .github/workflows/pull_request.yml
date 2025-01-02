@@ -28,7 +28,7 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           log-public-key: false
-      - name: Setup post check known hosts
+      - name: Check known hosts
         shell: bash
         run: |
           ./check.sh
