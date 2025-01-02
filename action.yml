@@ -48,7 +48,6 @@ runs:
         SSH_HOST: ${{ inputs.ssh-host }}
         SSH_KEY_TYPE: ${{ inputs.ssh-key-type }}
         SSH_KNOWN_HOSTS: ${{ inputs.ssh-known-hosts }}
-        SSH_KNOWN_HOSTS_FILE: '~/.ssh/known_hosts'
       with:
         main: |
           sh action.sh
