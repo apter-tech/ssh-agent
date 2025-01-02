@@ -1,11 +1,11 @@
 name: 'apter-tech/ssh-agent'
-description: 'Run `ssh-agent`, load an SSH key to access other private repositories and setup `known_hosts` for host verification.',
+description: 'Run `ssh-agent`, load an SSH key to access other private repositories and setup `known_hosts` for host verification.'
 inputs:
   ssh-host:
     description: Hostname to fetch SSH keys from using ssh-keyscan.
     required: false
   ssh-key-type:
-    description: |
+    description: >
       Specify the type of the key to fetch from the scanned hosts. The possible values are “ecdsa”, “ed25519”, “ecdsa-sk”, “ed25519-sk”, or “rsa”.
       Multiple values may be specified by separating them with commas. The default is to fetch all the above key types.
     required: false
