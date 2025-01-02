@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 mkdir -p "$(dirname "${SSH_KNOWN_HOSTS_FILE}")"
 
 if [ -z "${SSH_HOST}" ] && [ -z "${SSH_KNOWN_HOSTS}" ]; then
@@ -13,6 +15,7 @@ else
 Both 'ssh-host' and 'ssh-known-hosts' inputs are set. Using 'ssh-known-hosts'."
         fi
         echo "${SSH_KNOWN_HOSTS}" >> "${SSH_KNOWN_HOSTS_FILE}"
+        echo "::notice file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=Notice::${SSH_KNOWN_HOSTS_FILE} has been created."
     else
         echo "::warning file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=Security risk::\
 If an ssh_known_hosts file is constructed using ssh-keyscan without verifying the keys, \
@@ -33,5 +36,6 @@ Failed to scan SSH host keys for ${SSH_HOST}"
                 exit 1
             fi
         fi
+        echo "::notice file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=Notice::${SSH_KNOWN_HOSTS_FILE} has been created."
     fi
 fi
