@@ -33,7 +33,7 @@ jobs:
         if: runner.os == 'macos'
         shell: bash
         run: |
-          brew install docker
+          brew install --cask docker
       - name: Deploy over SSH
         shell: bash
         env:
