@@ -2,9 +2,9 @@
 
 SSH_KNOWN_HOSTS_FILE="${HOME}/.ssh/known_hosts"
 
-if ! grep -q "${SSH_KNOWN_HOSTS}" "${SSH_KNOWN_HOSTS_FILE}" ; then
+if [ -s "${SSH_KNOWN_HOSTS_FILE}" ] ; then
     echo "::error file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=Assertion Error::\
-${SSH_KNOWN_HOSTS_FILE} file should not contain the ssh fingerprint after the job."
+${SSH_KNOWN_HOSTS_FILE} file should be removed."
     exit 1
 fi
 
