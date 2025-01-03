@@ -1,8 +1,11 @@
 #!/usr/bin/env sh
 
-if [ -s "${HOME}/.ssh/known_hosts" ]; then
-    echo "ok"
-    #echo "::error file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=Assertion Error::\
-#~/.ssh/known_hosts file should not exist after the job."
-    #exit 1
+SSH_KNOWN_HOSTS_FILE="${HOME}/.ssh/known_hosts"
+
+if ! grep -q "${SSH_KNOWN_HOSTS}" "${SSH_KNOWN_HOSTS_FILE}" ; then
+    echo "::error file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=Assertion Error::\
+${SSH_KNOWN_HOSTS_FILE} file should not contain the ssh fingerprint after the job."
+    exit 1
 fi
+
+unset SSH_KNOWN_HOSTS_FILE
