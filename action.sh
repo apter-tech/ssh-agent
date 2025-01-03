@@ -26,13 +26,13 @@ ssh-keyscan can help in the detection of tampered keyfiles or man in the middle 
 the ssh_known_hosts file was created."
     
         if [ -z "${SSH_KEY_TYPE}" ]; then
-            if ! ssh-keyscan "${SSH_HOST}" >> "${SSH_KNOWN_HOSTS_FILE}"; then
+            if ! ssh-keyscan "${SSH_HOST} | grep -o '^[^#]*'" >> "${SSH_KNOWN_HOSTS_FILE}"; then
                 echo "::error file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=SSH Keyscan Failed::\
 Failed to scan SSH host keys for ${SSH_HOST}"
                 exit 1
             fi
         else
-            if ! ssh-keyscan -t "${SSH_KEY_TYPE}" "${SSH_HOST}" >> "${SSH_KNOWN_HOSTS_FILE}"; then
+            if ! ssh-keyscan -t "${SSH_KEY_TYPE}" "${SSH_HOST}" | grep -o '^[^#]*' >> "${SSH_KNOWN_HOSTS_FILE}"; then
                 echo "::error file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=SSH Keyscan Failed::\
 Failed to scan SSH host keys for ${SSH_HOST}"
                 exit 1
@@ -41,7 +41,5 @@ Failed to scan SSH host keys for ${SSH_HOST}"
         echo "::notice file=$(basename "$0"),line=${LINENO},endLine=${LINENO},title=Notice::${SSH_KNOWN_HOSTS_FILE} has been created."
     fi
 fi
-
-chmod 600 "${SSH_KNOWN_HOSTS_FILE}"
 
 unset SSH_KNOWN_HOSTS_FILE
