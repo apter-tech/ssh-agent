@@ -35,14 +35,6 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387 # v0.9.0
-      with:
-        ssh-private-key: ${{ inputs.ssh-private-key }}
-        ssh-auth-sock: ${{ inputs.ssh-auth-sock }}
-        log-public-key: ${{ inputs.log-public-key }}
-        ssh-agent-cmd: ${{ inputs.ssh-agent-cmd }}
-        ssh-add-cmd: ${{ inputs.ssh-add-cmd }}
-        git-cmd: ${{ inputs.git-cmd }}
     - uses: pyTooling/Actions/with-post-step@9ceefdbf5dceae8c441fc393ed82344c7ca8bbdb # v3.1.1
       env:
         SSH_HOST: ${{ inputs.ssh-host }}
@@ -53,6 +45,14 @@ runs:
           sh "${{ github.action_path }}/action.sh"
         post: |
           sh "${{ github.action_path }}/post_action.sh"
+    - uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387 # v0.9.0
+      with:
+        ssh-private-key: ${{ inputs.ssh-private-key }}
+        ssh-auth-sock: ${{ inputs.ssh-auth-sock }}
+        log-public-key: ${{ inputs.log-public-key }}
+        ssh-agent-cmd: ${{ inputs.ssh-agent-cmd }}
+        ssh-add-cmd: ${{ inputs.ssh-add-cmd }}
+        git-cmd: ${{ inputs.git-cmd }}
 branding:
   icon: loader
   color: 'purple'
