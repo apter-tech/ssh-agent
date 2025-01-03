@@ -50,9 +50,9 @@ runs:
         SSH_KNOWN_HOSTS: ${{ inputs.ssh-known-hosts }}
       with:
         main: |
-          sh action.sh
+          sh "${{ github.action_path }}/action.sh"
         post: |
-          sh post_action.sh
+          sh "${{ github.action_path }}/post_action.sh"
 branding:
   icon: loader
   color: 'purple'
