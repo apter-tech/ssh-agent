@@ -1,0 +1,31 @@
+on:
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        type: string
+        description: New version for the release.
+        required: true
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+      - name: Tag release
+        shell: sh
+        env:
+          RELEASE_VERSION: ${{ inputs.releaseVersion }}
+        run: |
+          git tag -a "${RELEASE_VERSION}" -m "Release ${RELEASE_VERSION}"
+          git push origin "${RELEASE_VERSION}"
+          gh release create "${RELEASE_VERSION}" \
+            --repo="$GITHUB_REPOSITORY" \
+            --generate-notes \
+            --latest \
+            --title "${RELEASE_VERSION}"
+
+
