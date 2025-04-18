@@ -35,7 +35,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - uses: pyTooling/Actions/with-post-step@9ceefdbf5dceae8c441fc393ed82344c7ca8bbdb # v3.1.1
+    - uses: pyTooling/Actions/with-post-step@33edd82e6f283fa4bb95cf46eeea4ee24da28f04 # v4.3.0
       env:
         SSH_HOST: ${{ inputs.ssh-host }}
         SSH_KEY_TYPE: ${{ inputs.ssh-key-type }}
