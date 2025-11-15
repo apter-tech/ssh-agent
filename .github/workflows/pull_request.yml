@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
       - name: Setup post check of known hosts file
-        uses: pyTooling/Actions/with-post-step@9ceefdbf5dceae8c441fc393ed82344c7ca8bbdb # v3.1.1
+        uses: pyTooling/Actions/with-post-step@c2282e4d63fb9f7b3e8f4c672b01d9dab7af22c3 # v6.7.0
         env:
           SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
         with:
