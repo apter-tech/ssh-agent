@@ -13,7 +13,7 @@ jobs:
           - windows-2025
     runs-on: ${{ matrix.os }}      
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Setup post check of known hosts file
         uses: pyTooling/Actions/with-post-step@9ceefdbf5dceae8c441fc393ed82344c7ca8bbdb # v3.1.1
         env:
